@@ -7,7 +7,7 @@ screen = pygame.display.set_mode((500,500))
 running = True
 time = pygame.time.Clock()
 
-la_font = pygame.font.SysFont("Arial", 16, True, False)
+la_font = pygame.font.SysFont("Arial", 20, True, False)
 
 info = la_font.render("Tienes 10 segundos",0,(255,255,255))
 
@@ -25,7 +25,7 @@ for x in range(25):
     w = random.randrange(10,30)
     h = random.randrange(10,40)
     x = random.randrange(450)
-    y = random.randrange(450)
+    y = random.randrange(20,450)
     listarec.append(pygame.Rect(x, y, w, h))
 
 while running == True:
@@ -42,13 +42,15 @@ while running == True:
     print pygame.time.get_ticks()/1000
     seconds = pygame.time.get_ticks()/1000
     seconds = str(seconds)
-    contador = la_font.render(seconds,0,(0,0,230))
+    contador = la_font.render(seconds,0,(255,255,255))
 
-    screen.blit(info, (100, 10))
-    screen.blit(contador, (400, 10))
-    (r1.center) = pygame.mouse.get_pos()
+
+    r1.center = pygame.mouse.get_pos()
 
     screen.fill((0,0,0))
+    screen.blit(info, (20, 10))
+    screen.blit(contador, (450, 10))
+
     for recs in listarec:
         pygame.draw.rect(screen,(0,200,0), recs)
     pygame.draw.rect(screen,(200,20,20), r1)
