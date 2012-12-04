@@ -63,6 +63,7 @@ class Character(DisplayObject):
             self.kill()
 
     def frame(self, cursor, left_click):
+        super(Character, self).frame(cursor, left_click)
         if left_click and cursor.colliderect(self.get_rect()):
             self.hit(cursor.center)
 
@@ -70,7 +71,6 @@ class Character(DisplayObject):
         cursor_y = cursor.center[1]
 
         d = sqrt((self.x + self.w / 2 - cursor_x) ** 2 + (self.y + self.h / 2 - cursor_y) ** 2)
-        print d
         self.speed = max(.1, 10 - d / 20)
 
         self.x += self.speed if cursor_x < self.x + self.w / 2 else -self.speed
@@ -89,5 +89,13 @@ class Zombie(Character):
         self.resize(random.uniform(.5, 1))
         self.energy = 3
 
+    def test(self, a):
+        print "pipo: " + str(a)
+
     def kill(self):
+        super(Zombie, self).kill()
         self.__init__(self.screen, self.src_surface)
+
+
+
+
