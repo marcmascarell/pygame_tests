@@ -1,9 +1,10 @@
 import pygame
 import random
+from pygame import transform
 
 pygame.init()
 
-screen = pygame.display.set_mode((500,500))
+screen = pygame.display.set_mode((800,600))
 running = True
 time = pygame.time.Clock()
 
@@ -22,9 +23,12 @@ so.play(-1)
 last_divided = 0
 coins = 50
 
+zombie = pygame.image.load('img/zombie.png')
+
 for x in range(25):
     w = random.randrange(10,30)
     h = random.randrange(10,40)
+
     x = random.randrange(450)
     y = random.randrange(20,450)
     listarec.append(pygame.Rect(x, y, w, h))
@@ -36,11 +40,12 @@ while running == True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             for recs in listarec:
                 if r1.colliderect(recs):
-                    recs.width = 0
-                    recs.height = 0
+                    #recs.width = 0
+                    #recs.height = 0
+                    listarec.remove(recs)
 
     time.tick(20)
-    print pygame.time.get_ticks()/1000
+    #print pygame.time.get_ticks()/1000
     secondsint = pygame.time.get_ticks()/1000
     seconds = str(secondsint)
 
@@ -60,8 +65,12 @@ while running == True:
     screen.blit(contador, (450, 10))
     screen.blit(show_coins, (250, 10))
 
+
     for recs in listarec:
-        pygame.draw.rect(screen,(0,200,0), recs)
+        recs[0] += 1
+        #pygame.draw.rect(screen,(0,200,0), recs)
+        screen.blit(transform.scale(zombie, recs[2:]), recs)
+
     pygame.draw.rect(screen,(200,20,20), r1)
     pygame.display.update()
 

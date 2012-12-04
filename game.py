@@ -19,8 +19,6 @@ seconds = 0
 so = pygame.mixer.Sound("sound.wav")
 so.play(-1)
 
-
-
 for x in range(25):
     w = random.randrange(10,30)
     h = random.randrange(10,40)
